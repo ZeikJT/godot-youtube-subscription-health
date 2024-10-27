@@ -7,6 +7,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4nktc")
@@ -24,43 +28,34 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -50.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1.00188, 0.998285)
 
-[node name="ProcessCSVButton" type="Button" parent="InputScreen"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InputScreen"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -41.0
-offset_right = 223.0
-offset_bottom = -10.0
-grow_vertical = 0
-text = "Process Manual Text Input"
-
-[node name="ImportCSVButton" type="Button" parent="InputScreen"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -213.0
-offset_top = -41.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 0
+offset_top = -31.0
+grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="ProcessCSVButton" type="Button" parent="InputScreen/HBoxContainer"]
+layout_mode = 2
+text = "Process Manual Text Input"
+
+[node name="ImportCSVButton" type="Button" parent="InputScreen/HBoxContainer"]
+layout_mode = 2
 text = "Import Subscriptions CSV"
 
-[node name="FileDialog" type="FileDialog" parent="InputScreen"]
-mode = 2
+[node name="OpenFileDialog" type="FileDialog" parent="InputScreen"]
 title = "Open a File"
-size = Vector2i(275, 159)
+size = Vector2i(337, 159)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
@@ -81,10 +76,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -50.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.00121, 0.997768)
@@ -93,14 +85,11 @@ editable = false
 
 [node name="LoadingProgressBar" type="ProgressBar" parent="LoadingScreen"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
 offset_top = -27.0
-offset_right = -10.0
-offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 max_value = 1.0
@@ -114,32 +103,111 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OutputRichTextLabel" type="RichTextLabel" parent="OutputScreen"]
+[node name="TabContainer" type="TabContainer" parent="OutputScreen"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -50.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 1
+
+[node name="LatestVideoSort" type="Control" parent="OutputScreen/TabContainer"]
+layout_mode = 2
+
+[node name="SortedOutputRichTextLabel" type="RichTextLabel" parent="OutputScreen/TabContainer/LatestVideoSort"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 0.997175)
 bbcode_enabled = true
 
-[node name="StartOverButton" type="Button" parent="OutputScreen"]
+[node name="CSVSort" type="Control" parent="OutputScreen/TabContainer"]
+layout_mode = 2
+
+[node name="OutputRichTextLabel" type="RichTextLabel" parent="OutputScreen/TabContainer/CSVSort"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.997175)
+bbcode_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OutputScreen"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_top = -31.0
-offset_right = 44.0
-offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1, 1.00641)
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="OutputStartOverButton" type="Button" parent="OutputScreen/HBoxContainer"]
+layout_mode = 2
 text = "Start Over"
+
+[node name="CreateCSVButton" type="Button" parent="OutputScreen/HBoxContainer"]
+layout_mode = 2
+text = "Create CSV"
+
+[node name="OutputCSVScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CSVTextEdit" type="TextEdit" parent="OutputCSVScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+editable = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OutputCSVScreen"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="CSVStartOverButton" type="Button" parent="OutputCSVScreen/HBoxContainer"]
+layout_mode = 2
+text = "Start Over"
+
+[node name="BackToOutputButton" type="Button" parent="OutputCSVScreen/HBoxContainer"]
+layout_mode = 2
+text = "Back to Output
+"
+
+[node name="SaveCSVToFileButton" type="Button" parent="OutputCSVScreen/HBoxContainer"]
+layout_mode = 2
+text = "Save to File
+"
+
+[node name="CopyToClipboardButton" type="Button" parent="OutputCSVScreen/HBoxContainer"]
+layout_mode = 2
+text = "Copy to Clipboard"
+
+[node name="SaveFileDialog" type="FileDialog" parent="OutputCSVScreen"]
+access = 2
+use_native_dialog = true
