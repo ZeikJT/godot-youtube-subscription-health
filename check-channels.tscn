@@ -111,7 +111,6 @@ anchor_bottom = 1.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
 
 [node name="LatestVideoSort" type="Control" parent="OutputScreen/TabContainer"]
 layout_mode = 2
